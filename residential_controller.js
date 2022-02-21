@@ -44,7 +44,9 @@ class Elevator {
         this.floorRequestButtonList = []
         this.floorRequestList = []
         this.generateFloorRequestButton(_amountOfFloors)
-        this.move(this.currentFloor, this.direction)
+        this.requestFloor(3)
+        
+        
     }
 
 
@@ -57,28 +59,20 @@ class Elevator {
 
 
     requestFloor(requestedFloor) {
+        this.floorRequestList.push(requestedFloor);
+        this.move(this.floorRequestList)
+        console.log("this is my array for my requested floor" ,this.floorRequestList)
+        
 
     }
     
     
     move(currentFloor, direction) {
         
-        if(direction = "up") {
-            for (let i = currentFloor; i < 8; i++) {
-                console.log(i)
-                currentFloor++
-                // console.log(currentFloor)
-                }
-            }
-        else if(direction = "down") {
-            for (let i = currentFloor; i > 8; i--) {
-                console.log(i)
-                currentFloor++
-                // console.log(currentFloor)
-                
-                }
-               
-        }
+        // while (i < 10) {
+        //     text += "The number is " + i;
+        //     i++;
+        //   } 
 
     }
 
