@@ -38,12 +38,13 @@ class Elevator {
     constructor(_id, _amountOfFloors) {
         this.ID = _id
         this.status = "idle"
-        this.direction
-        this.currentFloor
+        this.direction = "up"
+        this.currentFloor = 2
         this.door = new Door(1)
         this.floorRequestButtonList = []
         this.floorRequestList = []
         this.generateFloorRequestButton(_amountOfFloors)
+        this.move(this.currentFloor, this.direction)
     }
 
 
@@ -60,7 +61,24 @@ class Elevator {
     }
     
     
-    move() {
+    move(currentFloor, direction) {
+        
+        if(direction = "up") {
+            for (let i = currentFloor; i < 8; i++) {
+                console.log(i)
+                currentFloor++
+                // console.log(currentFloor)
+                }
+            }
+        else if(direction = "down") {
+            for (let i = currentFloor; i > 8; i--) {
+                console.log(i)
+                currentFloor++
+                // console.log(currentFloor)
+                
+                }
+               
+        }
 
     }
 
@@ -92,8 +110,8 @@ class Door {
 }
 
 
-let myColumn = new Column(1, 10, 2)
-console.log(myColumn.elevatorList[0])
+let myColumn = new Column(1, 10, 1)
+// console.log(myColumn.elevatorList[0])
 
 
 
