@@ -18,9 +18,18 @@ class Column {
 
 
       generateCallButton(_amountOfFloors) {
-        for (let i = 0; i < _amountOfFloors; i++) {
-          var newCallButton = new CallButton(i + 1);
-          this.callButtonList.push(newCallButton);
+          let callbuttonID = 1
+        for (let buttonFloor = 0; buttonFloor < _amountOfFloors; buttonFloor++) {
+        
+            if (buttonFloor < _amountOfFloors - 1) {
+                var newCallButton = new CallButton(buttonFloor + 1, "OFF", buttonFloor + 1, "up");
+                this.callButtonList.push(newCallButton);
+            } 
+            if (buttonFloor > 0) {
+                var newCallButton = new CallButton(buttonFloor + 1, "OFF", buttonFloor + 1, "down");
+                this.callButtonList.push(newCallButton);
+            }
+        
         }
       }
 
@@ -140,10 +149,10 @@ class Door {
 
 
 let myColumn = new Column(1,"offline", 10, 1)
-console.log(myColumn.elevatorList[0])
+console.log(myColumn)
 
-myColumn.elevatorList[0].floorRequestList = [9,4]
-myColumn.elevatorList[0].requestFloor(7)
+// myColumn.elevatorList[0].floorRequestList = [9,4]
+// myColumn.elevatorList[0].requestFloor(7)
 
 
 
