@@ -43,14 +43,41 @@ class Column {
 
 
 
-    requestElevator (requestedFloor, direction) {
-        
-    }
+    // requestElevator (floor, direction) {
+    //     let elevator = this.findElevator(floor, direction)
+    //     this.floorRequestList .push(floor);
+    //     this.move()
+    //     this.operateDoors()
+    //     return elevator
+
+    // }
 
 
-    findElevator() {
+    // findElevator(floor, direction) {
+    //     let bestElevator 
+    //     let bestScore = 5
+    //     let referenceGap = 10000000
+    //     let bestElevatorInformations
+    //     this.elevatorList.forEach((elevator) => {
+    //         console.log(6)
+    //     });
 
-    }
+    // }
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -59,7 +86,7 @@ class Elevator {
         this.ID = id
         this.status = "idle"
         this.direction = null
-        this.currentFloor = 2
+        this.currentFloor = 9
         this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
@@ -98,12 +125,14 @@ class Elevator {
                 this.direction = "up"
                 console.log(this.direction)
                 this.sortFloorList()
+                destination = this.floorRequestList[0]
                 while(this.currentFloor < destination) {
                     this.currentFloor ++
                     console.log(this.currentFloor)
                 }} else if (this.currentFloor > destination) {
                     this.direction = "down"
                     this.sortFloorList()
+                    destination = this.floorRequestList[0]
                     while(this.currentFloor > destination) {
                         this.currentFloor --
                     }
@@ -121,13 +150,19 @@ class Elevator {
    
 
     sortFloorList(){
-        if (this.direction = "up") {
+        if (this.direction == "up") {
         this.floorRequestList.sort()
         console.log("sortFloorList", this.floorRequestList)
-        } else {
+        } else if (this.direction == "down"){
             this.floorRequestList.reverse()
         }
 
+
+    }
+
+
+
+    operateDoors() {
 
     }
 
@@ -160,10 +195,10 @@ class Door {
 
 
 let myColumn = new Column(1, 10, 2)
-console.log(myColumn)
+// console.log(myColumn)
 
-// myColumn.elevatorList[0].floorRequestList = [9,4]
-// myColumn.elevatorList[0].requestFloor(7)
+myColumn.elevatorList[0].floorRequestList = [5,4]
+myColumn.elevatorList[0].requestFloor(7)
 
 
 
