@@ -56,10 +56,9 @@ class Elevator {
 
 
     requestFloor(requestedFloor) {
-        console.log("banane")
         this.floorRequestList.push(requestedFloor);
         console.log("this is my array for my requested floor" ,this.floorRequestList)
-        this.move(this.floorRequestList)
+        this.move()
         
         
         
@@ -69,7 +68,7 @@ class Elevator {
     
     move() {
         
-        while (this.floorRequestList !=== []) {
+        // while (this.floorRequestList = []) {
             console.log("requeslist", this.floorRequestList)
             let destination = this.floorRequestList[0]
             this.status = "moving"
@@ -89,12 +88,15 @@ class Elevator {
                     while(this.currentFloor > destination) {
                         this.currentFloor --
                     }
+                   
                 }
-                
+                // let this.status = "stopped"
+                // this.floorRequestListar.shift()
+                // console.log(this.floorRequestListar)
 
             }
             
-        }
+        // }
           
 
    
