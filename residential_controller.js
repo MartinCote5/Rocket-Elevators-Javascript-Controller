@@ -15,7 +15,7 @@ class Column {
 
     generateElevator(amountOfFloors, amountOfElevators) {
         for (let i = 0; i < amountOfElevators; i++) {
-          var newElevator = new Elevator(i + 1, "idle",  amountOfFloors, 1);
+          var newElevator = new Elevator(i + 1,  amountOfFloors);
           this.elevatorList.push(newElevator);
         }
       }
@@ -45,10 +45,10 @@ class Column {
 
     requestElevator (floor, direction) {
         let elevator = this.findElevator(floor, direction)
-        // this.floorRequestList .push(floor);
-        // this.move()
-        // this.operateDoors()
-        // return elevator
+    //     // this.floorRequestList .push(floor);
+    //     // this.move()
+    //     // this.operateDoors()
+    //     // return elevator
         
 
     }
@@ -61,7 +61,9 @@ class Column {
         let referenceGap = 10000000
         let bestElevatorInformations
         this.elevatorList.forEach((elevator) => {
-            console.log(6)
+            if floor == elevator.currentFloor && elevator.status == "stopped" && 
+
+            console.log("in my for each",elevator.currentFloor)
            
         });
 
@@ -99,7 +101,7 @@ class Elevator {
 
     generateFloorRequestButton(amountOfFloors) {
         for (let i = 0; i < amountOfFloors; i++) {
-          var newFloorRequestButton = new FloorRequestButton(i + 1, "OFF", i + 1);
+          var newFloorRequestButton = new FloorRequestButton(i + 1, i + 1);
           this.floorRequestButtonList.push(newFloorRequestButton);
         }
       }
@@ -199,10 +201,12 @@ class Door {
 
 let myColumn = new Column(1, 10, 2)
 // console.log(myColumn)
-
+// console.log(myColumn.elevatorList)
 // myColumn.elevatorList[0].floorRequestList = [5,4]
 // myColumn.elevatorList[0].requestFloor(7)
 
+
+// console.log(myColumn.elevatorList)
 
 myColumn.requestElevator (5, "up")
 
