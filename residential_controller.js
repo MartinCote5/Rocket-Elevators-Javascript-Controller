@@ -57,7 +57,6 @@ class Elevator {
 
     requestFloor(requestedFloor) {
         this.floorRequestList.push(requestedFloor);
-        console.log("this is my array for my requested floor" ,this.floorRequestList)
         this.move()
         
         
@@ -68,7 +67,7 @@ class Elevator {
     
     move() {
         
-        // while (this.floorRequestList = []) {
+        while (this.floorRequestList.length != 0 ) {
             console.log("requeslist", this.floorRequestList)
             let destination = this.floorRequestList[0]
             this.status = "moving"
@@ -78,33 +77,33 @@ class Elevator {
                 
                 this.direction = "up"
                 console.log(this.direction)
-                // this.sortFloorList(this.floorRequestList)
+                this.sortFloorList()
                 while(this.currentFloor < destination) {
                     this.currentFloor ++
                     console.log(this.currentFloor)
                 }} else if (this.currentFloor > destination) {
                     this.direction = "down"
-                    this.sortFloorList(this.floorRequestList)
+                    this.sortFloorList()
                     while(this.currentFloor > destination) {
                         this.currentFloor --
                     }
                    
                 }
-                // let this.status = "stopped"
-                // this.floorRequestListar.shift()
-                // console.log(this.floorRequestListar)
+                this.status = "stopped"
+                this.floorRequestList.shift()
+                console.log(this.floorRequestList)
 
             }
             
-        // }
+        }
           
 
    
 
-    sortFloorList(floorRequestList){
+    sortFloorList(){
         if (this.direction = "up") {
         this.floorRequestList.sort()
-        console.log("sortFloorList", floorRequestList)
+        console.log("sortFloorList", this.floorRequestList)
         } else {
             this.floorRequestList.reverse()
         }
@@ -141,10 +140,11 @@ class Door {
 
 
 let myColumn = new Column(1,"offline", 10, 1)
-// console.log(myColumn.elevatorList[0])
+console.log(myColumn.elevatorList[0])
 
-
+myColumn.elevatorList[0].floorRequestList = [9,4]
 myColumn.elevatorList[0].requestFloor(7)
+
 
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
