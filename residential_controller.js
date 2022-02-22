@@ -1,3 +1,7 @@
+var callButtonID = 1
+
+
+
 class Column {
     constructor(_id, _status, _amountOfFloors, _amountOfElevators) {
         this.ID = _id;
@@ -18,16 +22,18 @@ class Column {
 
 
       generateCallButton(_amountOfFloors) {
-          let callbuttonID = 1
-        for (let buttonFloor = 0; buttonFloor < _amountOfFloors; buttonFloor++) {
-        
-            if (buttonFloor < _amountOfFloors - 1) {
-                var newCallButton = new CallButton(buttonFloor + 1, "OFF", buttonFloor + 1, "up");
+          
+        for (let buttonFloor = 1; buttonFloor < _amountOfFloors + 1; buttonFloor++) {
+            
+            if (buttonFloor < _amountOfFloors) {
+                var newCallButton = new CallButton(callButtonID, "OFF", buttonFloor, "up");
                 this.callButtonList.push(newCallButton);
+                callButtonID++
             } 
-            if (buttonFloor > 0) {
-                var newCallButton = new CallButton(buttonFloor + 1, "OFF", buttonFloor + 1, "down");
+            if (buttonFloor > 1) {
+                var newCallButton = new CallButton(callButtonID, "OFF", buttonFloor, "down");
                 this.callButtonList.push(newCallButton);
+                callButtonID++
             }
         
         }
