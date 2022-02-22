@@ -3,35 +3,35 @@ var callButtonID = 1
 
 
 class Column {
-    constructor(_id, _status, _amountOfFloors, _amountOfElevators) {
-        this.ID = _id;
-        this.status = _status
+    constructor(id, amountOfFloors, amountOfElevators) {
+        this.ID = id;
+        this.status = "offline"
         this.elevatorList = [];
         this.callButtonList = [];
-        this.generateElevator(_amountOfFloors, _amountOfElevators);
-        this.generateCallButton(_amountOfFloors)
+        this.generateElevator(amountOfFloors, amountOfElevators);
+        this.generateCallButton(amountOfFloors)
     };
 
 
-    generateElevator(_amountOfFloors, _amountOfElevators) {
-        for (let i = 0; i < _amountOfElevators; i++) {
-          var newElevator = new Elevator(i + 1, "idle",  _amountOfFloors, 1);
+    generateElevator(amountOfFloors, amountOfElevators) {
+        for (let i = 0; i < amountOfElevators; i++) {
+          var newElevator = new Elevator(i + 1, "idle",  amountOfFloors, 1);
           this.elevatorList.push(newElevator);
         }
       }
 
 
-      generateCallButton(_amountOfFloors) {
+      generateCallButton(amountOfFloors) {
           
-        for (let buttonFloor = 1; buttonFloor < _amountOfFloors + 1; buttonFloor++) {
+        for (let buttonFloor = 1; buttonFloor < amountOfFloors + 1; buttonFloor++) {
             
-            if (buttonFloor < _amountOfFloors) {
-                var newCallButton = new CallButton(callButtonID, "OFF", buttonFloor, "up");
+            if (buttonFloor < amountOfFloors) {
+                var newCallButton = new CallButton(callButtonID, buttonFloor, "up");
                 this.callButtonList.push(newCallButton);
                 callButtonID++
             } 
             if (buttonFloor > 1) {
-                var newCallButton = new CallButton(callButtonID, "OFF", buttonFloor, "down");
+                var newCallButton = new CallButton(callButtonID, buttonFloor, "down");
                 this.callButtonList.push(newCallButton);
                 callButtonID++
             }
@@ -47,23 +47,28 @@ class Column {
         
     }
 
+
+    findElevator() {
+
+    }
+
 }
 
 class Elevator {
-    constructor(_id, _status, _amountOfFloors, _currentFloor) {
-        this.ID = _id
-        this.status = _status
+    constructor(id, amountOfFloors) {
+        this.ID = id
+        this.status = "idle"
         this.direction = null
         this.currentFloor = 2
-        this.door = new Door(_id, "closed")
+        this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
-        this.generateFloorRequestButton(_amountOfFloors)
+        this.generateFloorRequestButton(amountOfFloors)
     }
 
 
-    generateFloorRequestButton(_amountOfFloors) {
-        for (let i = 0; i < _amountOfFloors; i++) {
+    generateFloorRequestButton(amountOfFloors) {
+        for (let i = 0; i < amountOfFloors; i++) {
           var newFloorRequestButton = new FloorRequestButton(i + 1, "OFF", i + 1);
           this.floorRequestButtonList.push(newFloorRequestButton);
         }
@@ -129,32 +134,32 @@ class Elevator {
 }
 
 class CallButton {
-    constructor(_id, _status, _floor, _direction) {
-        this.ID = _id
-        this.status = _status
-        this.floor = _floor
-        this.direction = _direction
+    constructor(id, floor, direction) {
+        this.ID = id
+        this.status = "OFF"
+        this.floor = floor
+        this.direction = direction
 
     }
 }
 
 class FloorRequestButton {
-    constructor(_id, _status, _floor) {
-        this.ID = _id
-        this.status = _status
-        this.floor = _floor
+    constructor(id, floor) {
+        this.ID = id
+        this.status = "OFF"
+        this.floor = floor
     }
 }
 
 class Door {
-    constructor(_id, _status) {
-        this.ID = _id
-        this.status = _status
+    constructor(id) {
+        this.ID = id
+        this.status = "closed"
     }
 }
 
 
-let myColumn = new Column(1,"offline", 10, 1)
+let myColumn = new Column(1, 10, 2)
 console.log(myColumn)
 
 // myColumn.elevatorList[0].floorRequestList = [9,4]
