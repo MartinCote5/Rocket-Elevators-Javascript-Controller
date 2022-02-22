@@ -43,26 +43,29 @@ class Column {
 
 
 
-    // requestElevator (floor, direction) {
-    //     let elevator = this.findElevator(floor, direction)
-    //     this.floorRequestList .push(floor);
-    //     this.move()
-    //     this.operateDoors()
-    //     return elevator
+    requestElevator (floor, direction) {
+        let elevator = this.findElevator(floor, direction)
+        // this.floorRequestList .push(floor);
+        // this.move()
+        // this.operateDoors()
+        // return elevator
+        
 
-    // }
+    }
 
 
-    // findElevator(floor, direction) {
-    //     let bestElevator 
-    //     let bestScore = 5
-    //     let referenceGap = 10000000
-    //     let bestElevatorInformations
-    //     this.elevatorList.forEach((elevator) => {
-    //         console.log(6)
-    //     });
+    findElevator(floor, direction) {
+        console.log("parameter value",floor, direction)
+        let bestElevator 
+        let bestScore = 5
+        let referenceGap = 10000000
+        let bestElevatorInformations
+        this.elevatorList.forEach((elevator) => {
+            console.log(6)
+           
+        });
 
-    // }
+    }
 
 
 
@@ -86,7 +89,7 @@ class Elevator {
         this.ID = id
         this.status = "idle"
         this.direction = null
-        this.currentFloor = 9
+        this.currentFloor = 2
         this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
@@ -197,9 +200,11 @@ class Door {
 let myColumn = new Column(1, 10, 2)
 // console.log(myColumn)
 
-myColumn.elevatorList[0].floorRequestList = [5,4]
-myColumn.elevatorList[0].requestFloor(7)
+// myColumn.elevatorList[0].floorRequestList = [5,4]
+// myColumn.elevatorList[0].requestFloor(7)
 
+
+myColumn.requestElevator (5, "up")
 
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
