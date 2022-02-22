@@ -1,7 +1,7 @@
 class Column {
-    constructor(_id, _amountOfFloors, _amountOfElevators) {
+    constructor(_id, _status, _amountOfFloors, _amountOfElevators) {
         this.ID = _id;
-        this.status = "online"
+        this.status = _status
         this.elevatorList = [];
         this.callButtonList = [];
         this.generateElevator(_amountOfFloors, _amountOfElevators);
@@ -11,7 +11,7 @@ class Column {
 
     generateElevator(_amountOfFloors, _amountOfElevators) {
         for (let i = 0; i < _amountOfElevators; i++) {
-          var newElevator = new Elevator(i + 1, _amountOfFloors);
+          var newElevator = new Elevator(i + 1, "idle",  _amountOfFloors, 1);
           this.elevatorList.push(newElevator);
         }
       }
@@ -38,15 +38,12 @@ class Elevator {
     constructor(_id, _status, _amountOfFloors, _currentFloor) {
         this.ID = _id
         this.status = _status
-        this.direction = "up"
+        this.direction = null
         this.currentFloor = 2
         this.door = new Door(_id, "closed")
         this.floorRequestButtonList = []
         this.floorRequestList = []
         this.generateFloorRequestButton(_amountOfFloors)
-        this.requestFloor(3)
-        
-        
     }
 
 
@@ -59,53 +56,66 @@ class Elevator {
 
 
     requestFloor(requestedFloor) {
+        console.log("banane")
         this.floorRequestList.push(requestedFloor);
-        this.move(this.floorRequestList)
         console.log("this is my array for my requested floor" ,this.floorRequestList)
+        this.move(this.floorRequestList)
+        
         
         
 
     }
     
     
-    move(floorRequestList) {
+    move() {
         
-        // while (floorRequestList = !(null)) {
-            let destination = floorRequestList
+        while (this.floorRequestList !=== []) {
+            console.log("requeslist", this.floorRequestList)
+            let destination = this.floorRequestList[0]
             this.status = "moving"
             console.log("current", this.currentFloor)
-            console.log("current", destination)
-            if (this.currentFloor < this.destination) {
+            console.log("desti", destination)
+            if (this.currentFloor < destination) {
                 
                 this.direction = "up"
-                this.sortFloorList(floorRequestList)
-                // while(this.currentFloor < this.destination) {
-                //     this.currentFloor ++
-                // }
+                console.log(this.direction)
+                // this.sortFloorList(this.floorRequestList)
+                while(this.currentFloor < destination) {
+                    this.currentFloor ++
+                    console.log(this.currentFloor)
+                }} else if (this.currentFloor > destination) {
+                    this.direction = "down"
+                    this.sortFloorList(this.floorRequestList)
+                    while(this.currentFloor > destination) {
+                        this.currentFloor --
+                    }
+                }
+                
 
-            // }
+            }
             
-            // text += "The number is " + i;
-            // i++;
-          } 
+        }
+          
+
+   
+
+    sortFloorList(floorRequestList){
+        if (this.direction = "up") {
+        this.floorRequestList.sort()
+        console.log("sortFloorList", floorRequestList)
+        } else {
+            this.floorRequestList.reverse()
+        }
+
 
     }
-
-    // sortFloorList(floorRequestList, direction){
-    //     if (direction = "up") {
-    //     floorRequestList.sort()
-    //     console.log(floorRequestList)
-    //     }
-
-
-    // }
 
 }
 
 class CallButton {
-    constructor(_id, _floor, _direction) {
+    constructor(_id, _status, _floor, _direction) {
         this.ID = _id
-        this.status = null
+        this.status = _status
         this.floor = _floor
         this.direction = _direction
 
@@ -121,18 +131,18 @@ class FloorRequestButton {
 }
 
 class Door {
-    constructor(_id) {
+    constructor(_id, _status) {
         this.ID = _id
-        this.status = null
+        this.status = _status
     }
 }
 
 
-let myColumn = new Column(1, 10, 1)
+let myColumn = new Column(1,"offline", 10, 1)
 // console.log(myColumn.elevatorList[0])
 
 
-
+myColumn.elevatorList[0].requestFloor(7)
 
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
