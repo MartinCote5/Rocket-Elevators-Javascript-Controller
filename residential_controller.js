@@ -242,10 +242,6 @@ class Door {
 
 // MAIN ---- paste chosen scenario from the readme file down below
 
-let myColumn = new Column(1, 10, 2);
-myColumn.elevatorList[0].currentFloor = 2;
-myColumn.elevatorList[1].currentFloor = 6;
-let elevator = myColumn.requestElevator(3, "up");
-elevator.requestFloor(7);
+// END MAIN
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door };
