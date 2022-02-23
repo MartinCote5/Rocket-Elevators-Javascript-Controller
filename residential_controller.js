@@ -74,8 +74,8 @@ class Column {
         var bestElevatorInformations
         this.elevatorList.forEach((elevator) => {
             // console.log(referenceGap,'GAPP')
-            if (floor == elevator.currentFloor && elevator.status == "stopped" && direction == elevator.direction) {
-                console.log(referenceGap,'firstIfGap')
+            if (floor == elevator.currentFloor && elevator.status == "idle" && direction == elevator.direction) {
+                // console.log(referenceGap,'firstIfGap')
                 
                 bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestScore, referenceGap, bestElevator, floor)
             } else if (floor > elevator.currentFloor && elevator.direction == "up" && direction == elevator.direction) {
@@ -91,7 +91,7 @@ class Column {
         
         
 
-        console.log(bestElevatorInformations.referenceGap,'scoreretured')
+        // console.log(bestElevatorInformations.referenceGap,'scoreretured')
                 
             bestElevator = bestElevatorInformations.bestElevator
             bestScore = bestElevatorInformations.bestScore
@@ -123,7 +123,7 @@ class Column {
         // console.log(bestElevator)
         // console.log(bestElevator,"bestelevator")
         // bestElevatorInformations = [bestElevator, bestScore, referenceGap]
-        console.log(referenceGap,'GAPP')
+        // console.log(referenceGap,'GAPP')
         return {
             bestElevator,
             bestScore, 
@@ -156,8 +156,8 @@ class Column {
 class Elevator {
     constructor(id, amountOfFloors) {
         this.ID = id
-        this.status = "stopped"
-        this.direction = "up"
+        this.status = "idle"
+        this.direction 
         this.currentFloor 
         this.door = new Door(id)
         this.floorRequestButtonList = []
@@ -187,22 +187,22 @@ class Elevator {
     move() {
         
         while (this.floorRequestList.length != 0 ) {
-            console.log("requeslist", this.floorRequestList)
+            // console.log("requeslist", this.floorRequestList)
             let destination = this.floorRequestList[0]
             this.status = "moving"
-            console.log("current", this.currentFloor)
-            console.log("desti", destination)
+            // console.log("current", this.currentFloor)
+            // console.log("desti", destination)
             if (this.currentFloor < destination) {
                 
-                this.direction = "up"
-                console.log(this.direction)
+                this.direction == "up"
+                // console.log(this.direction)
                 this.sortFloorList()
                 destination = this.floorRequestList[0]
                 while(this.currentFloor < destination) {
                     this.currentFloor ++
-                    console.log(this.currentFloor)
+                    // console.log(this.currentFloor)
                 }} else if (this.currentFloor > destination) {
-                    this.direction = "down"
+                    this.direction == "down"
                     this.sortFloorList()
                     destination = this.floorRequestList[0]
                     while(this.currentFloor > destination) {
@@ -210,9 +210,9 @@ class Elevator {
                     }
                    
                 }
-                this.status = "stopped"
+                this.status = "idle"
                 this.floorRequestList.shift()
-                console.log(this.floorRequestList)
+                // console.log(this.floorRequestList)
 
             }
             
@@ -224,7 +224,7 @@ class Elevator {
     sortFloorList(){
         if (this.direction == "up") {
         this.floorRequestList.sort()
-        console.log("sortFloorList", this.floorRequestList)
+        // console.log("sortFloorList", this.floorRequestList)
         } else if (this.direction == "down"){
             this.floorRequestList.reverse()
         }
@@ -236,7 +236,7 @@ class Elevator {
 
     operateDoors() {
         this.door.status = "opened"
-        console.log(this.door)
+        // console.log(this.door)
         this.door.status = "closed"
 
     }
@@ -269,7 +269,7 @@ class Door {
 }
 
 
-let myColumn = new Column(1, 10, 2)
+
 // console.log(myColumn)
 // console.log(myColumn.elevatorList)
 // myColumn.elevatorList[0].floorRequestList = [5,4]
@@ -277,16 +277,92 @@ let myColumn = new Column(1, 10, 2)
 
 
 // console.log(myColumn.elevatorList)
-myColumn.elevatorList[0].currentFloor = 2
-myColumn.elevatorList[1].currentFloor = 6
+
 // console.log(myColumn.elevatorList[1])
-let elevator = myColumn.requestElevator (3, "up")
+
 
 
 // console.log(elevator, "my winner")
 
 
+
+
+
+
+
+let myColumn = new Column(1, 10, 2)
+myColumn.elevatorList[0].currentFloor = 2
+myColumn.elevatorList[1].currentFloor = 6
+let elevator = myColumn.requestElevator (3, "up")
 elevator.requestFloor(7)
+
+
+
+
+
+
+/*
+==================================Scenario 1=================================================
+SET column TO NEW Column WITH 1 AND online AND 10 AND 2 '//id, status, amountOfFloors, amountOfElevators
+SET first elevator floor OF column elevatorsList TO 2
+SET second elevator floor OF column elevatorsList TO 6
+
+SET elevator TO CALL column requestElevator WITH 3 AND Up RETURNING elevator
+CALL elevator requestFloor WITH 7
+'==================================End Scenario 1=============================================
+
+
+'==================================Scenario 2=================================================
+SET column TO NEW Column WITH 1 AND online AND 10 AND 2 '//id, status, amountOfFloors, amountOfElevators
+SET first elevator floor OF column elevatorsList TO 10
+SET second elevator floor OF column elevatorsList TO 3
+
+'//Part 1
+SET elevator TO CALL column requestElevator WITH 1 AND Up RETURNING elevator
+CALL elevator requestFloor WITH 6
+
+'//Part 2
+SET elevator TO CALL column requestElevator WITH 3 AND Up RETURNING elevator
+CALL elevator requestFloor WITH 5
+
+'//Part 3
+SET elevator TO CALL column requestElevator WITH 9 AND Down RETURNING elevator
+CALL elevator requestFloor WITH 2
+'==================================End Scenario 2=============================================
+
+'==================================Scenario 3=================================================
+SET column TO NEW Column WITH 1 AND online AND 10 AND 2 '//id, status, amountOfFloors, amountOfElevators
+SET first elevator floor OF column elevatorsList TO 10
+SET second elevator floor OF column elevatorsList TO 3
+SET second elevator status OF column elevatorsList TO moving
+ADD 6 TO second elevator floorRequestList OF column elevatorsList
+
+'//Part 1
+SET elevator TO CALL column requestElevator WITH 3 AND Down RETURNING elevator
+CALL elevator requestFloor WITH 2
+
+'//Part 2
+SET elevator TO CALL column requestElevator WITH 10 AND Down RETURNING elevator
+CALL elevator requestFloor WITH 3
+'==================================End Scenario 3=============================================
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
 
