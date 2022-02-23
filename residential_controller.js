@@ -5,7 +5,7 @@ var callButtonID = 1
 class Column {
     constructor(id, amountOfFloors, amountOfElevators) {
         this.ID = id;
-        this.status = "offline"
+        this.status = "online"
         this.elevatorList = [];
         this.callButtonList = [];
         this.generateElevator(amountOfFloors, amountOfElevators);
@@ -48,7 +48,7 @@ class Column {
         // console.log('elevvv2', elevator)
 
 
-        let x = elevator.floorRequestList.push(floor);
+        elevator.floorRequestList.push(floor);
         
         // console.log(floor, "floor")
         // console.log(x, "x")
@@ -158,7 +158,7 @@ class Elevator {
         this.ID = id
         this.status = "stopped"
         this.direction = "up"
-        this.currentFloor = 9
+        this.currentFloor 
         this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
@@ -277,9 +277,10 @@ let myColumn = new Column(1, 10, 2)
 
 
 // console.log(myColumn.elevatorList)
-myColumn.elevatorList[1].currentFloor = 2
+myColumn.elevatorList[0].currentFloor = 2
+myColumn.elevatorList[1].currentFloor = 6
 // console.log(myColumn.elevatorList[1])
-let elevator = myColumn.requestElevator (5, "up")
+let elevator = myColumn.requestElevator (3, "up")
 
 
 // console.log(elevator, "my winner")
