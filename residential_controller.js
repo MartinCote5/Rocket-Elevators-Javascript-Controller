@@ -45,17 +45,16 @@ class Column {
 
     requestElevator (floor, direction) {
         let elevator = this.findElevator(floor, direction)
-        // console.log('elevvv2', elevator)
+        
 
 
         elevator.floorRequestList.push(floor);
         
-        // console.log(floor, "floor")
-        // console.log(x, "x")
+       
        
         elevator.move()
         elevator.operateDoors()
-        // console.log(elevator)
+        
         return elevator
 
         
@@ -67,15 +66,15 @@ class Column {
 
 
     findElevator(floor, direction) {
-        // console.log("parameter value",floor, direction)
+       
         let bestElevator 
         var bestScore = 5
         var referenceGap = 10000000
         var bestElevatorInformations
         this.elevatorList.forEach((elevator) => {
-            // console.log(referenceGap,'GAPP')
+            
             if (floor == elevator.currentFloor && elevator.status == "idle" && direction == elevator.direction) {
-                // console.log(referenceGap,'firstIfGap')
+                
                 
                 bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestScore, referenceGap, bestElevator, floor)
             } else if (floor > elevator.currentFloor && elevator.direction == "up" && direction == elevator.direction) {
@@ -91,12 +90,12 @@ class Column {
         
         
 
-        // console.log(bestElevatorInformations.referenceGap,'scoreretured')
+       
                 
             bestElevator = bestElevatorInformations.bestElevator
             bestScore = bestElevatorInformations.bestScore
             referenceGap = bestElevatorInformations.referenceGap
-            // console.log(bestElevator,'bestel')   
+            
 
         
     })
@@ -108,7 +107,7 @@ class Column {
 
 
     checkIfElevatorIsBetter(scoreToCheck, newElevator, bestScore, referenceGap, bestElevator, floor) {
-        // console.log("checl",referenceGap)
+      
         if (scoreToCheck < bestScore) {
             bestScore = scoreToCheck
             bestElevator = newElevator 
@@ -119,11 +118,7 @@ class Column {
             bestElevator = newElevator
             referenceGap = gap
         }
-        // console.log("allo")
-        // console.log(bestElevator)
-        // console.log(bestElevator,"bestelevator")
-        // bestElevatorInformations = [bestElevator, bestScore, referenceGap]
-        // console.log(referenceGap,'GAPP')
+       
         return {
             bestElevator,
             bestScore, 
@@ -187,20 +182,19 @@ class Elevator {
     move() {
         
         while (this.floorRequestList.length != 0 ) {
-            // console.log("requeslist", this.floorRequestList)
+          
             let destination = this.floorRequestList[0]
             this.status = "moving"
-            // console.log("current", this.currentFloor)
-            // console.log("desti", destination)
+           
             if (this.currentFloor < destination) {
                 
                 this.direction == "up"
-                // console.log(this.direction)
+                
                 this.sortFloorList()
                 destination = this.floorRequestList[0]
                 while(this.currentFloor < destination) {
                     this.currentFloor ++
-                    // console.log(this.currentFloor)
+                    
                 }} else if (this.currentFloor > destination) {
                     this.direction == "down"
                     this.sortFloorList()
@@ -212,7 +206,7 @@ class Elevator {
                 }
                 this.status = "idle"
                 this.floorRequestList.shift()
-                // console.log(this.floorRequestList)
+        
 
             }
             
@@ -224,7 +218,6 @@ class Elevator {
     sortFloorList(){
         if (this.direction == "up") {
         this.floorRequestList.sort()
-        // console.log("sortFloorList", this.floorRequestList)
         } else if (this.direction == "down"){
             this.floorRequestList.reverse()
         }
@@ -236,7 +229,6 @@ class Elevator {
 
     operateDoors() {
         this.door.status = "opened"
-        // console.log(this.door)
         this.door.status = "closed"
 
     }
@@ -270,20 +262,6 @@ class Door {
 
 
 
-// console.log(myColumn)
-// console.log(myColumn.elevatorList)
-// myColumn.elevatorList[0].floorRequestList = [5,4]
-// myColumn.elevatorList[0].requestFloor(7)
-
-
-// console.log(myColumn.elevatorList)
-
-// console.log(myColumn.elevatorList[1])
-
-
-
-// console.log(elevator, "my winner")
-
 
 
 
@@ -296,6 +274,10 @@ myColumn.elevatorList[1].currentFloor = 6
 let elevator = myColumn.requestElevator (3, "up")
 elevator.requestFloor(7)
 
+
+
+
+module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
 
 
 
@@ -350,20 +332,5 @@ CALL elevator requestFloor WITH 3
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
 
 
