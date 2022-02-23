@@ -50,15 +50,20 @@ class Column {
 
         let x = elevator.floorRequestList.push(floor);
         
-        console.log(floor, "floor")
-        console.log(x, "x")
-        console.log(elevator)
-    //     // this.move()
-    //     // this.operateDoors()
-    //     // return elevator
+        // console.log(floor, "floor")
+        // console.log(x, "x")
+       
+        elevator.move()
+        elevator.operateDoors()
+        // console.log(elevator)
+        return elevator
+
         
 
     }
+
+
+
 
 
     findElevator(floor, direction) {
@@ -120,7 +125,7 @@ class Column {
         // bestElevatorInformations = [bestElevator, bestScore, referenceGap]
         console.log(referenceGap,'GAPP')
         return {
-            bestElevator, 
+            bestElevator,
             bestScore, 
             referenceGap
         }
@@ -179,57 +184,60 @@ class Elevator {
     }
     
     
-    // move() {
+    move() {
         
-    //     while (this.floorRequestList.length != 0 ) {
-    //         console.log("requeslist", this.floorRequestList)
-    //         let destination = this.floorRequestList[0]
-    //         this.status = "moving"
-    //         console.log("current", this.currentFloor)
-    //         console.log("desti", destination)
-    //         if (this.currentFloor < destination) {
+        while (this.floorRequestList.length != 0 ) {
+            console.log("requeslist", this.floorRequestList)
+            let destination = this.floorRequestList[0]
+            this.status = "moving"
+            console.log("current", this.currentFloor)
+            console.log("desti", destination)
+            if (this.currentFloor < destination) {
                 
-    //             this.direction = "up"
-    //             console.log(this.direction)
-    //             this.sortFloorList()
-    //             destination = this.floorRequestList[0]
-    //             while(this.currentFloor < destination) {
-    //                 this.currentFloor ++
-    //                 console.log(this.currentFloor)
-    //             }} else if (this.currentFloor > destination) {
-    //                 this.direction = "down"
-    //                 this.sortFloorList()
-    //                 destination = this.floorRequestList[0]
-    //                 while(this.currentFloor > destination) {
-    //                     this.currentFloor --
-    //                 }
+                this.direction = "up"
+                console.log(this.direction)
+                this.sortFloorList()
+                destination = this.floorRequestList[0]
+                while(this.currentFloor < destination) {
+                    this.currentFloor ++
+                    console.log(this.currentFloor)
+                }} else if (this.currentFloor > destination) {
+                    this.direction = "down"
+                    this.sortFloorList()
+                    destination = this.floorRequestList[0]
+                    while(this.currentFloor > destination) {
+                        this.currentFloor --
+                    }
                    
-    //             }
-    //             this.status = "stopped"
-    //             this.floorRequestList.shift()
-    //             console.log(this.floorRequestList)
+                }
+                this.status = "stopped"
+                this.floorRequestList.shift()
+                console.log(this.floorRequestList)
 
-    //         }
+            }
             
-    //     }
+        }
           
 
    
 
-    // sortFloorList(){
-    //     if (this.direction == "up") {
-    //     this.floorRequestList.sort()
-    //     console.log("sortFloorList", this.floorRequestList)
-    //     } else if (this.direction == "down"){
-    //         this.floorRequestList.reverse()
-    //     }
+    sortFloorList(){
+        if (this.direction == "up") {
+        this.floorRequestList.sort()
+        console.log("sortFloorList", this.floorRequestList)
+        } else if (this.direction == "down"){
+            this.floorRequestList.reverse()
+        }
 
 
-    // }
+    }
 
 
 
     operateDoors() {
+        this.door.status = "opened"
+        console.log(this.door)
+        this.door.status = "closed"
 
     }
 
@@ -271,8 +279,13 @@ let myColumn = new Column(1, 10, 2)
 // console.log(myColumn.elevatorList)
 myColumn.elevatorList[1].currentFloor = 2
 // console.log(myColumn.elevatorList[1])
-myColumn.requestElevator (5, "up")
+let elevator = myColumn.requestElevator (5, "up")
 
+
+// console.log(elevator, "my winner")
+
+
+elevator.requestFloor(7)
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
 
