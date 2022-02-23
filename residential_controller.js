@@ -61,11 +61,11 @@ class Column {
         var referenceGap = 10000000
         var bestElevatorInformations
         this.elevatorList.forEach((elevator) => {
-
+            console.log(referenceGap,'GAPP')
             if (floor == elevator.currentFloor && elevator.status == "stopped" && direction == elevator.direction) {
-                console.log(bestScore,'GAPP')
+                console.log(referenceGap,'firstIfGap')
                 
-                   bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestScore, referenceGap, bestElevator, floor)
+                bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestScore, referenceGap, bestElevator, floor)
             } else if (floor > elevator.currentFloor && elevator.direction == "up" && direction == elevator.direction) {
                 bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestScore, referenceGap, bestElevator, floor)  
             } else if (floor < elevator.currentFloor && elevator.direction == "down" && direction == elevator.direction) {
@@ -79,12 +79,12 @@ class Column {
         
         
 
-        console.log(bestElevatorInformations[1],'scoreretured')
+        console.log(bestElevatorInformations[2],'scoreretured')
                 
             bestElevator = bestElevatorInformations[0]
             bestScore = bestElevatorInformations[1]
             referenceGap = bestElevatorInformations[2]
-            console.log(bestScore,'GAPP')   
+            console.log(referenceGap,'GAPP')   
             return bestElevator
         
     })
@@ -110,7 +110,7 @@ class Column {
         // console.log(bestElevator)
         // console.log(bestElevator,"bestelevator")
         // bestElevatorInformations = [bestElevator, bestScore, referenceGap]
-        console.log(bestScore,'GAPP')
+        console.log(referenceGap,'GAPP')
         return [bestElevator, bestScore, referenceGap]
         
         
@@ -141,7 +141,7 @@ class Elevator {
         this.ID = id
         this.status = "stopped"
         this.direction = "up"
-        this.currentFloor = 10
+        this.currentFloor = 9
         this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
@@ -257,7 +257,7 @@ let myColumn = new Column(1, 10, 2)
 
 
 // console.log(myColumn.elevatorList)
-myColumn.elevatorList[1].currentFloor = 1
+myColumn.elevatorList[1].currentFloor = 2
 // console.log(myColumn.elevatorList[1])
 myColumn.requestElevator (5, "up")
 
