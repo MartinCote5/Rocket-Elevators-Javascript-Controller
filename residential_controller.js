@@ -45,7 +45,14 @@ class Column {
 
     requestElevator (floor, direction) {
         let elevator = this.findElevator(floor, direction)
-    //     // this.floorRequestList .push(floor);
+        // console.log('elevvv2', elevator)
+
+
+        let x = elevator.floorRequestList.push(floor);
+        
+        console.log(floor, "floor")
+        console.log(x, "x")
+        console.log(elevator)
     //     // this.move()
     //     // this.operateDoors()
     //     // return elevator
@@ -55,13 +62,13 @@ class Column {
 
 
     findElevator(floor, direction) {
-        console.log("parameter value",floor, direction)
+        // console.log("parameter value",floor, direction)
         let bestElevator 
         var bestScore = 5
         var referenceGap = 10000000
         var bestElevatorInformations
         this.elevatorList.forEach((elevator) => {
-            console.log(referenceGap,'GAPP')
+            // console.log(referenceGap,'GAPP')
             if (floor == elevator.currentFloor && elevator.status == "stopped" && direction == elevator.direction) {
                 console.log(referenceGap,'firstIfGap')
                 
@@ -79,15 +86,16 @@ class Column {
         
         
 
-        console.log(bestElevatorInformations[2],'scoreretured')
+        console.log(bestElevatorInformations.referenceGap,'scoreretured')
                 
-            bestElevator = bestElevatorInformations[0]
-            bestScore = bestElevatorInformations[1]
-            referenceGap = bestElevatorInformations[2]
-            console.log(referenceGap,'GAPP')   
-            return bestElevator
+            bestElevator = bestElevatorInformations.bestElevator
+            bestScore = bestElevatorInformations.bestScore
+            referenceGap = bestElevatorInformations.referenceGap
+            // console.log(bestElevator,'bestel')   
+
         
     })
+    return bestElevator
 }
         
    
@@ -111,7 +119,11 @@ class Column {
         // console.log(bestElevator,"bestelevator")
         // bestElevatorInformations = [bestElevator, bestScore, referenceGap]
         console.log(referenceGap,'GAPP')
-        return [bestElevator, bestScore, referenceGap]
+        return {
+            bestElevator, 
+            bestScore, 
+            referenceGap
+        }
         
         
 
@@ -263,3 +275,5 @@ myColumn.requestElevator (5, "up")
 
 
 module.exports = { Column, Elevator, CallButton, FloorRequestButton, Door }
+
+
