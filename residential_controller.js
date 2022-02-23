@@ -66,25 +66,27 @@ class Column {
                 console.log(bestScore,'GAPP')
                 
                    bestElevatorInformations = this.checkIfElevatorIsBetter(1, elevator, bestScore, referenceGap, bestElevator, floor)
-        //     } else if (floor > elevator.currentFloor && elevator.direction == "up" && direction == elevator.direction) {
-        //         bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestScore, referenceGap, bestElevator, floor)  
-        //     } else if (floor < elevator.currentFloor && elevator.direction == "down" && direction == elevator.direction) {
-        //         bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestScore, referenceGap, bestElevator, floor)
-        //     } else if (elevator.status == "idle") {
-        //         bestElevatorInformations = this.checkIfElevatorIsBetter(3, elevator, bestScore, referenceGap, bestElevator, floor)
-        //     } else {
-        //         bestElevatorInformations = this.checkIfElevatorIsBetter(4, elevator, bestScore, referenceGap, bestElevator, floor)
-        //     }
+            } else if (floor > elevator.currentFloor && elevator.direction == "up" && direction == elevator.direction) {
+                bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestScore, referenceGap, bestElevator, floor)  
+            } else if (floor < elevator.currentFloor && elevator.direction == "down" && direction == elevator.direction) {
+                bestElevatorInformations = this.checkIfElevatorIsBetter(2, elevator, bestScore, referenceGap, bestElevator, floor)
+            } else if (elevator.status == "idle") {
+                bestElevatorInformations = this.checkIfElevatorIsBetter(3, elevator, bestScore, referenceGap, bestElevator, floor)
+            } else {
+                bestElevatorInformations = this.checkIfElevatorIsBetter(4, elevator, bestScore, referenceGap, bestElevator, floor)
+            }
+        
+        
+        
+
         console.log(bestElevatorInformations[1],'scoreretured')
                 
             bestElevator = bestElevatorInformations[0]
             bestScore = bestElevatorInformations[1]
             referenceGap = bestElevatorInformations[2]
-            console.log(referenceGap,'GAPP')   
+            console.log(bestScore,'GAPP')   
             return bestElevator
         
-        }
-        console.log(referenceGap,'GAPP')
     })
 }
         
@@ -139,7 +141,7 @@ class Elevator {
         this.ID = id
         this.status = "stopped"
         this.direction = "up"
-        this.currentFloor = 5
+        this.currentFloor = 10
         this.door = new Door(id)
         this.floorRequestButtonList = []
         this.floorRequestList = []
@@ -255,7 +257,7 @@ let myColumn = new Column(1, 10, 2)
 
 
 // console.log(myColumn.elevatorList)
-// myColumn.elevatorList[1].currentFloor = 8
+myColumn.elevatorList[1].currentFloor = 1
 // console.log(myColumn.elevatorList[1])
 myColumn.requestElevator (5, "up")
 
