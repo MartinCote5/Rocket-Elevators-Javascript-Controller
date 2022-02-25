@@ -4,6 +4,10 @@ Here is my template for the javascript residential controller. It is done with a
 
 To summarise, in the MAIN the column, the elevator and the buttons are generated. They are placed at the right position. A button is pressed up or down in a specific floor to call an elevator, the best elevator is chosen and come to your floor. Finally a button is pressed in the elevator to move to the desired floor.
 
+The following link is a video to a description of my project! :
+
+https://www.youtube.com/watch?v=UHgRiJSiDpg
+
 The necessary files to run some tests are also present. With Node JS and NPM installed, first run:
 
 `npm install`
