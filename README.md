@@ -25,38 +25,63 @@ Once it's done, run the test!
 // scenario 1 ---------
 
 let myColumn = new Column(1, 10, 2);
+
 myColumn.elevatorList[0].currentFloor = 2;
+
 myColumn.elevatorList[1].currentFloor = 6;
+
 let elevator = myColumn.requestElevator(3, "up");
+
 elevator.requestFloor(7);
 
 // scenario 2 ---------
 
 let myColumn = new Column(1, 10, 2);
+
 myColumn.elevatorList[0].currentFloor = 10;
+
 myColumn.elevatorList[1].currentFloor = 3;
+
 // part 1
+
 let elevator = myColumn.requestElevator(1, "up");
+
 elevator.requestFloor(6);
+
 // part 2
+
 elevator = myColumn.requestElevator(3, "up");
+
 elevator.requestFloor(5);
+
 // part 3
+
 elevator = myColumn.requestElevator(9, "down");
+
 elevator.requestFloor(2);
 
 // scenario 3 ---------
 
 let myColumn = new Column(1, 10, 2);
+
 myColumn.elevatorList[0].currentFloor = 10;
+
 myColumn.elevatorList[1].currentFloor = 3;
+
 myColumn.elevatorList[1].direction = "up";
+
 myColumn.elevatorList[1].status = "moving";
+
 myColumn.elevatorList[1].floorRequestList.push(6);
 
 // part 1
+
 let elevator = myColumn.requestElevator(3, "down");
+
 elevator.requestFloor(2);
+
 // part 2
+
 elevator = myColumn.requestElevator(10, "down");
+
 elevator.requestFloor(3);
