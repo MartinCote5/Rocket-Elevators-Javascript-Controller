@@ -36,9 +36,7 @@ class Column {
 
   requestElevator(floor, direction) {
     let elevator = this.findElevator(floor, direction);
-
     elevator.floorRequestList.push(floor);
-
     elevator.move();
     elevator.operateDoors();
 
@@ -57,7 +55,7 @@ class Column {
     this.elevatorList.forEach((elevator) => {
       if (
         floor == elevator.currentFloor &&
-        elevator.status == "idle" &&
+        elevator.status == "stopped" &&
         direction == elevator.direction
       ) {
         bestElevatorInformations = this.checkIfElevatorIsBetter(
@@ -182,7 +180,7 @@ class Elevator {
       this.status = "moving";
 
       if (this.currentFloor < destination) {
-        this.direction == "up";
+        this.direction = "up";
 
         this.sortFloorList();
         destination = this.floorRequestList[0];
@@ -190,16 +188,17 @@ class Elevator {
           this.currentFloor++;
         }
       } else if (this.currentFloor > destination) {
-        this.direction == "down";
+        this.direction = "down";
         this.sortFloorList();
         destination = this.floorRequestList[0];
         while (this.currentFloor > destination) {
           this.currentFloor--;
         }
       }
-      this.status = "idle";
+      this.status = "stopped";
       this.floorRequestList.shift();
     }
+    this.status = "idle";
   }
 
   sortFloorList() {
