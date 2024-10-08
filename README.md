@@ -26,27 +26,42 @@ Only one scenario should be present at a time in your code, Make sure to remove 
 
 Once it's done, run the test!
 
+
+
 // scenario 1 ---------
 
 let myColumn = new Column(1, 10, 2);
 
-myColumn.elevatorList[0].currentFloor = 2;
+function setupGame() {
 
-myColumn.elevatorList[1].currentFloor = 6;
+  myColumn.elevatorList[0].currentFloor = 2;
+
+  myColumn.elevatorList[1].currentFloor = 6;
+}
+
+setupGame()
 
 let elevator = myColumn.requestElevator(3, "up");
 
 elevator.requestFloor(7);
 
+
+
 // scenario 2 ---------
 
 let myColumn = new Column(1, 10, 2);
 
-myColumn.elevatorList[0].currentFloor = 10;
+function setupGame() {
 
-myColumn.elevatorList[1].currentFloor = 3;
+    myColumn.elevatorList[0].currentFloor = 10;
+
+    myColumn.elevatorList[1].currentFloor = 3;
+    
+}
 
 // part 1
+
+setupGame()
 
 let elevator = myColumn.requestElevator(1, "up");
 
@@ -54,38 +69,110 @@ elevator.requestFloor(6);
 
 // part 2
 
+setupGame()
+
 elevator = myColumn.requestElevator(3, "up");
 
 elevator.requestFloor(5);
 
 // part 3
 
+setupGame()
+
 elevator = myColumn.requestElevator(9, "down");
 
 elevator.requestFloor(2);
+
+
 
 // scenario 3 ---------
 
 let myColumn = new Column(1, 10, 2);
 
-myColumn.elevatorList[0].currentFloor = 10;
+function setupGame() {
 
-myColumn.elevatorList[1].currentFloor = 3;
+    myColumn.elevatorList[0].currentFloor = 10;
 
-myColumn.elevatorList[1].direction = "up";
+    myColumn.elevatorList[1].currentFloor = 3;
 
-myColumn.elevatorList[1].status = "moving";
+    myColumn.elevatorList[1].direction = "up";
 
-myColumn.elevatorList[1].floorRequestList.push(6);
+    myColumn.elevatorList[1].status = "moving";
+
+    myColumn.elevatorList[1].floorRequestList.push(6);
+
+}
 
 // part 1
 
-let elevator = myColumn.requestElevator(3, "down");
+setupGame()
+
+let elevator = myColumn.requestElevator(4, "down");
 
 elevator.requestFloor(2);
 
 // part 2
 
-elevator = myColumn.requestElevator(10, "down");
+setupGame()
 
-elevator.requestFloor(3);
+elevator = myColumn.requestElevator(4, "up");
+
+elevator.requestFloor(5);
+
+
+
+// scenario 4 Extra---------
+
+let myColumn = new Column(1, 10, 2);
+
+function setupGame() {
+
+    myColumn.elevatorList[0].currentFloor = 3;
+
+    myColumn.elevatorList[0].direction = "up";
+
+    myColumn.elevatorList[0].status = "moving";
+
+    myColumn.elevatorList[0].floorRequestList.push(8);
+
+    myColumn.elevatorList[1].currentFloor = 9;
+
+    myColumn.elevatorList[1].direction = "down";
+
+    myColumn.elevatorList[1].status = "moving";
+
+    myColumn.elevatorList[1].floorRequestList.push(4);
+}
+
+// part 1
+
+setupGame()
+
+let elevator = myColumn.requestElevator(6, "up");
+
+elevator.requestFloor(7);
+
+// part 2
+
+setupGame()
+
+elevator = myColumn.requestElevator(5, "down");
+
+elevator.requestFloor(2);
+
+// part 3
+
+setupGame()
+
+elevator = myColumn.requestElevator(9, "down");
+
+elevator.requestFloor(5);
+
+// part 4
+
+setupGame()
+
+elevator = myColumn.requestElevator(2, "up");
+
+elevator.requestFloor(7);
+
