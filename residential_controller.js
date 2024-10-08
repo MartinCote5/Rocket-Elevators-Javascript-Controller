@@ -32,10 +32,22 @@ class Column {
     }
   }
 
-  //Simulate when a user press a button outside the elevator
+  // Simulate when a user press a button outside the elevator
 
   requestElevator(floor, direction) {
     let elevator = this.findElevator(floor, direction);
+   
+  // Check if the elevator is not picking up the user on his way,
+  // if not finish the elevator movement before moving toward the user
+
+    if (floor > elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "up" ) {
+      elevator.move();
+      elevator.operateDoors();
+    }
+    if (floor < elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "down" ) {
+      elevator.move();
+      elevator.operateDoors();
+    }
     elevator.floorRequestList.push(floor);
     elevator.move();
     elevator.operateDoors();
@@ -43,9 +55,9 @@ class Column {
     return elevator;
   }
 
-  //We use a score system depending on the current elevators state. Since the bestScore and the referenceGap are
-  //higher values than what could be possibly calculated, the first elevator will always become the default bestElevator,
-  //before being compared with to other elevators. If two elevators get the same score, the nearest one is prioritized.
+  // We use a score system depending on the current elevators state. Since the bestScore and the referenceGap are
+  // higher values than what could be possibly calculated, the first elevator will always become the default bestElevator,
+  // before being compared with to other elevators. If two elevators get the same score, the nearest one is prioritized.
 
   findElevator(floor, direction) {
     let bestElevator;
@@ -127,13 +139,22 @@ class Column {
     bestElevator,
     floor
   ) {
-    if (scoreToCheck < bestScore) {
+    if (scoreToCheck < bestScore && scoreToCheck < 4) {
       bestScore = scoreToCheck;
       bestElevator = newElevator;
       referenceGap = Math.abs(newElevator.currentFloor - floor);
-    } else if (scoreToCheck == bestScore) {
-      var gap = Math.abs(newElevator.currentFloor - floor);
+    } else if (scoreToCheck == bestScore && scoreToCheck < 4) {
+      var gap = Math.abs(newElevator.currentFloor - floor); 
     }
+
+    if (scoreToCheck < bestScore && scoreToCheck == 4) {
+      bestScore = scoreToCheck;
+      bestElevator = newElevator;
+      referenceGap = Math.abs(newElevator.floorRequestList[0] - floor);
+    } else if (scoreToCheck == bestScore && scoreToCheck == 4) {
+      var gap = Math.abs(newElevator.floorRequestList[0] - floor);      
+    }
+    
     if (referenceGap > gap) {
       bestElevator = newElevator;
       referenceGap = gap;
@@ -166,7 +187,7 @@ class Elevator {
     }
   }
 
-  //Simulate when a user press a button inside the elevator
+  // Simulate when a user press a button inside the elevator
 
   requestFloor(requestedFloor) {
     this.floorRequestList.push(requestedFloor);
@@ -240,6 +261,9 @@ class Door {
 }
 
 // MAIN ---- paste chosen scenario from the readme file down below
+
+
+
 
 // END MAIN
 
