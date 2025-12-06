@@ -272,19 +272,19 @@ function setupGame() {
 
 // part 1
 
-// setupGame()
+setupGame()
 
-// let elevator = myColumn.requestElevator(4, "down");
+let elevator = myColumn.requestElevator(4, "down");
 
-// elevator.requestFloor(2);
+elevator.requestFloor(2);
 
 // part 2
 
-setupGame()
+// setupGame()
 
-elevator = myColumn.requestElevator(4, "up");
+// elevator = myColumn.requestElevator(4, "up");
 
-elevator.requestFloor(5);
+// elevator.requestFloor(5);
 
 
 // END MAIN
