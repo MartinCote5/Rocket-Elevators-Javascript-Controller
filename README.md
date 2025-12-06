@@ -127,13 +127,13 @@ let myColumn = new Column(1, 10, 2);
 
 function setupGame() {
 
-    myColumn.elevatorList[0].currentFloor = 3;
+    myColumn.elevatorList[0].currentFloor = 4;
 
     myColumn.elevatorList[0].direction = "up";
 
     myColumn.elevatorList[0].status = "moving";
 
-    myColumn.elevatorList[0].floorRequestList.push(8);
+    myColumn.elevatorList[0].floorRequestList.push(5);
 
     myColumn.elevatorList[1].currentFloor = 9;
 
@@ -141,7 +141,7 @@ function setupGame() {
 
     myColumn.elevatorList[1].status = "moving";
 
-    myColumn.elevatorList[1].floorRequestList.push(4);
+    myColumn.elevatorList[1].floorRequestList.push(6);
 }
 
 // part 1
@@ -152,7 +152,7 @@ let elevator = myColumn.requestElevator(6, "up");
 
 elevator.requestFloor(7);
 
-// part 2
+// // part 2
 
 setupGame()
 
@@ -160,7 +160,7 @@ elevator = myColumn.requestElevator(5, "down");
 
 elevator.requestFloor(2);
 
-// part 3
+// // part 3
 
 setupGame()
 
@@ -168,11 +168,19 @@ elevator = myColumn.requestElevator(9, "down");
 
 elevator.requestFloor(5);
 
-// part 4
+// // part 4
 
 setupGame()
 
 elevator = myColumn.requestElevator(2, "up");
 
 elevator.requestFloor(7);
+
+// part 5
+
+setupGame()
+
+elevator = myColumn.requestElevator(3, "up");
+
+elevator.requestFloor(4);
 

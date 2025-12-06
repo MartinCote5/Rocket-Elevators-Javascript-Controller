@@ -40,14 +40,14 @@ class Column {
   // Check if the elevator is not picking up the user on his way,
   // if not finish the elevator movement before moving toward the user
 
-    if (floor > elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "up" ) {
-      elevator.move();
-      elevator.operateDoors();
-    }
-    if (floor < elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "down" ) {
-      elevator.move();
-      elevator.operateDoors();
-    }
+    // if (floor > elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "up" ) {
+    //   elevator.move();
+    //   elevator.operateDoors();
+    // }
+    // if (floor < elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "down" ) {
+    //   elevator.move();
+    //   elevator.operateDoors();
+    // }
     elevator.floorRequestList.push(floor);
     elevator.move();
     elevator.operateDoors();
@@ -80,6 +80,7 @@ class Column {
         );
       } else if (
         floor > elevator.currentFloor &&
+        floor < elevator.floorRequestList[0] &&
         elevator.direction == "up" &&
         direction == elevator.direction
       ) {
@@ -92,7 +93,8 @@ class Column {
           floor
         );
       } else if (
-        floor < elevator.currentFloor &&
+        floor < elevator.currentFloor &&  
+        floor > elevator.floorRequestList[0] &&
         elevator.direction == "down" &&
         direction == elevator.direction
       ) {
@@ -262,7 +264,39 @@ class Door {
 
 // MAIN ---- paste chosen scenario from the readme file down below
 
+// scenario 3 ---------
 
+let myColumn = new Column(1, 10, 2);
+
+function setupGame() {
+
+    myColumn.elevatorList[0].currentFloor = 10;
+
+    myColumn.elevatorList[1].currentFloor = 3;
+
+    myColumn.elevatorList[1].direction = "up";
+
+    myColumn.elevatorList[1].status = "moving";
+
+    myColumn.elevatorList[1].floorRequestList.push(6);
+
+}
+
+// part 1
+
+// setupGame()
+
+// let elevator = myColumn.requestElevator(4, "down");
+
+// elevator.requestFloor(2);
+
+// part 2
+
+setupGame()
+
+elevator = myColumn.requestElevator(4, "up");
+
+elevator.requestFloor(5);
 
 
 // END MAIN
