@@ -36,18 +36,6 @@ class Column {
 
   requestElevator(floor, direction) {
     let elevator = this.findElevator(floor, direction);
-   
-  // Check if the elevator is not picking up the user on his way,
-  // if not finish the elevator movement before moving toward the user
-
-    // if (floor > elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "up" ) {
-    //   elevator.move();
-    //   elevator.operateDoors();
-    // }
-    // if (floor < elevator.floorRequestList[0] && elevator.floorRequestList[0] !== null && elevator.direction == "down" ) {
-    //   elevator.move();
-    //   elevator.operateDoors();
-    // }
     elevator.floorRequestList.push(floor);
     elevator.move();
     elevator.operateDoors();
